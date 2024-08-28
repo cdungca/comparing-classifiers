@@ -2,9 +2,9 @@
 
 A study comparing the performance of the following classifiers: logistic regression, k-nearest neighbors, decision trees, and support vector machines. This is part of the course work for [UC Berkeley Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence). 
 
-CRISP-DM^1^ methodology was adopted in this study. The data was taken from [UCI Machine Learning repository](https://archive.ics.uci.edu/ml/datasets/bank+marketing). The dataset is related to 17 marketing campaigns from a Portuguese banking institution.
+CRISP-DM[^1] methodology was adopted in this study. The data was taken from [UCI Machine Learning repository](https://archive.ics.uci.edu/ml/datasets/bank+marketing). The dataset is related to 17 marketing campaigns from a Portuguese banking institution.
 
-![alt text](https://en.wikipedia.org/wiki/File:CRISP-DM_Process_Diagram.png "Image from Wikipedia")
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/CRISP-DM_Process_Diagram.png/598px-CRISP-DM_Process_Diagram.png "Image from Wikipedia")
 
 You can follow the detailed analysis done in the [Jupyter notebook](https://github.com/cdungca/comparing-classifiers/blob/main/prompt_III.ipynb).
 
@@ -38,7 +38,9 @@ Here are the fields included in the dataset, bank-additional-full.csv
 20 - nr.employed: number of employees - quarterly indicator (numeric)
 21 - y - has the client subscribed a term deposit? (binary: 'yes','no')
 
-To start the analysis, we've looked at the data distribution on the categorical fields and performed pre-processing or cleaning of data. Here are some of the data distributions:
+To start the analysis, we've looked at the data distribution on the categorical fields and performed pre-processing or cleaning of data. 
+
+Here are some of the data distributions:
 
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/age_distribution.png "Age Distribution")
 
@@ -56,7 +58,7 @@ To start the analysis, we've looked at the data distribution on the categorical 
 
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/default_distribution.png "Poutcome Distribution")
 
-Since our goal it choose a classifier for predictive model, we will remove duration since this feature highly affects the target (e.g., if duration=0 then y='no').
+Since our goal is to choose a classifier for predictive model, we will remove duration since this feature highly affects the target (e.g., if duration=0 then y='no').
 
 In pdays numeric field, client not previously contacted contains a value of 999. This will affect the scaling of data and we should just replace it to 0. 
 
@@ -95,9 +97,16 @@ Here's the table comparing the performance of the different classifiers using th
 
 And here are the Confusion Matrix and Roc Curve for each classifier:
 
+Logistic Regression
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_default-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
+
+KNN
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/knn_default-cmroc.png "KNN - Confusion Matrix and ROC Curve")
+
+Decision Tree
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/dtree_default-cmroc.png "Decision Tree - Confusion Matrix and ROC Curve")
+
+SVM
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_default-cmroc.png "SVM - Confusion Matrix and ROC Curve")
 
 ## Recommendation
@@ -106,7 +115,7 @@ And here are the Confusion Matrix and Roc Curve for each classifier:
 
 ## References
 
-1. Shearer C., The CRISP-DM model: the new blueprint for data mining, J Data Warehousing (2000); 5:13—22.
+[^1]: Shearer C., The CRISP-DM model: the new blueprint for data mining, J Data Warehousing (2000); 5:13—22.
 
 
 
