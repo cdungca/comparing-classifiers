@@ -60,7 +60,7 @@ Here are some of the data distributions:
 
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/marital_distribution.png "Marital Distribution")
 
-![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/default_distribution.png "Poutcome Distribution")
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/poutcome_distribution.png "Poutcome Distribution")
 
 Since our goal is to choose a classifier for predictive model, we will remove duration since this feature highly affects the target (e.g., if duration=0 then y='no').
 
@@ -92,32 +92,55 @@ The following numeric fields will be scaled:
 
 Here's the table comparing the performance of the different classifiers using the default parameters:
 
-|model|train score|test score|ave fit time (sec)|
-|--|--|--|--|
-|Logistic Regression| 0.900230|0.896475|1.340354|
-|KNN|0.914053|0.887054|1.089069|
-|Decision Tree|0.995047|0.840342|2.749162|
-|SVM|0.906057|0.900845|354.994642|
+|Model|Train Accuracy|Test Accuracy|Test Precision|Fit Time (sec)|
+|--|--|--|--|--|
+|Logistic Regression|0.900359|0.896572|0.617391	|1.219468|
+|KNN|0.914020|0.887152|0.498361|1.167804|
+|Decision Tree|0.995047|0.838302|0.299444|1.534464|
+|SVM|0.906057|0.900845|0.674185|195.869979|
+
+|Model|Train Accuracy|Test Accuracy|Test Precision|Fit Time (sec)|
+|--|--|--|--|--|
+|Logistic Regression|0.899485|0.895212|0.625995|1.268780|
+|KNN|0.924962|0.882490|0.464689|1.196504|
+|Decision Tree|0.902593|0.900748|0.661972|1.289213|
+|SVM|0.900165|0.897155|0.675958|113.831252|
 
 And here are the Confusion Matrix and Roc Curve for each classifier:
 
-Logistic Regression
+Using Default Parameters
+
+Logistic Regression (default)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_default-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
 
-KNN
+KNN (default)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/knn_default-cmroc.png "KNN - Confusion Matrix and ROC Curve")
 
-Decision Tree
+Decision Tree (default)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/dtree_default-cmroc.png "Decision Tree - Confusion Matrix and ROC Curve")
 
-SVM
+SVM (default)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_default-cmroc.png "SVM - Confusion Matrix and ROC Curve")
+
+Using Best Parameters
+
+Logistic Regression (C=0.01, Solver = liblinear)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_best-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
+
+KNN (n_neighbors = 3, weights = uniform)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/knn_best-cmroc.png "KNN - Confusion Matrix and ROC Curve")
+
+Decision Tree (max_depth = 5, min_samples_leaf = 2, criterion = gini)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/dtree_best-cmroc.png "Decision Tree - Confusion Matrix and ROC Curve")
+
+SVM (c= 0.01)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_best-cmroc.png "SVM - Confusion Matrix and ROC Curve")
+
 
 ## Recommendation
 
 
 
-## References
 
 [^1]: Shearer C., The CRISP-DM model: the new blueprint for data mining, J Data Warehousing (2000); 5:13—22.
 
