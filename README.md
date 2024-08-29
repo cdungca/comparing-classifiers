@@ -99,12 +99,12 @@ Here's the table comparing the performance of the different classifiers using th
 |Decision Tree|0.995047|0.838302|0.299444|1.534464|
 |SVM|0.906057|0.900845|**0.674185**|195.869979|
 
-|Model|Train Accuracy|Test Accuracy|Test Precision|Fit Time (sec)|
-|--|--|--|--|--|
-|Logistic Regression|0.899485|0.895212|0.625995|1.268780|
-|KNN|0.924962|0.882490|0.464689|1.196504|
-|Decision Tree|0.902593|0.900748|0.661972|1.289213|
-|SVM|0.900165|0.897155|**0.675958**|113.831252|
+|Model|Train Accuracy|Test Accuracy|Test Precision|
+|--|--|--|--|
+|Logistic Regression|0.899485|0.895212|0.625995|
+|KNN|0.924962|0.882490|0.464689|
+|Decision Tree|0.902593|0.900748|0.661972|
+|SVM|0.900165|0.897155|**0.675958**|
 
 And here are the Confusion Matrix and Roc Curve for each classifier:
 
