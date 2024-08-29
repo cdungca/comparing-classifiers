@@ -1,20 +1,20 @@
 # comparing-classifiers
 
-A study comparing the performance of the following classifiers: logistic regression, k-nearest neighbors, decision trees, and support vector machines. This is part of the course work for [UC Berkeley Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence). 
+A study comparing the performance of the different classifiers: logistic regression, k-nearest neighbors, decision trees, and support vector machines. This is part of the course work for [UC Berkeley Professional Certificate in Machine Learning and Artificial Intelligence](https://em-executive.berkeley.edu/professional-certificate-machine-learning-artificial-intelligence). 
 
-CRISP-DM[^1] methodology was adopted in this study. The data was taken from [UCI Machine Learning repository](https://archive.ics.uci.edu/ml/datasets/bank+marketing). The dataset is related to 17 marketing campaigns from a Portuguese banking institution.
+CRISP-DM[^1] methodology was adopted in this study and the data was taken from [UCI Machine Learning repository](https://archive.ics.uci.edu/ml/datasets/bank+marketing). The dataset is related to 17 marketing campaigns from a Portuguese banking institution.
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/CRISP-DM_Process_Diagram.png/598px-CRISP-DM_Process_Diagram.png "Image from Wikipedia")
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/CRISP-DM_Process_Diagram.png/598px-CRISP-DM_Process_Diagram.png "CRISP-DM Image from Wikipedia")
 
-You can follow the detailed analysis done in the [Jupyter notebook](https://github.com/cdungca/comparing-classifiers/blob/main/prompt_III.ipynb).
+You can follow the detailed analysis in the [Jupyter notebook](https://github.com/cdungca/comparing-classifiers/blob/main/prompt_III.ipynb).
 
 ## Objective
 
-The main objective of this study is to compare the performance of the different classifiers (logistic regression, k-nearest neighbors, decision trees, and support vector machines) and identify the best suited for a predictive model. This model will be used to identify the features and characteristics to increase campaign success.   
+The objective of this study is to compare the performance of the different classifiers (logistic regression, k-nearest neighbors, decision trees, and support vector machines) and identify the best one suited for predicting the postive outcome a marketing call.   
 
 ## Data Analysis
 
-Here are the fields included in the dataset, bank-additional-full.csv
+The data was collected from 17 marketing campaigns in May 2008 until November 2010. Here are the fields included in bank-additional-full.csv:
 
 |Field|Description|
 |--|--|
@@ -40,11 +40,11 @@ Here are the fields included in the dataset, bank-additional-full.csv
 |nr.employed|number of employees - quarterly indicator (numeric)|
 |y|has the client subscribed a term deposit? (binary: 'yes','no')|
 
-Target field in the dataset is y.
+The target is a binary field y which specifies if the marketing contact is successful with the value of "yes."
 
-To start the analysis, we've looked at the data distribution on the categorical fields and performed pre-processing or cleaning of data. 
+To start the analysis, we've looked at the data distribution on the categorical fields and performed additional pre-processing. 
 
-Here are some of the data distributions:
+Data distributions of some fields:
 
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/age_distribution.png "Age Distribution")
 
@@ -83,6 +83,7 @@ The following numeric fields will be scaled:
 
 - age
 - campaign
+- duration
 - pdays
 - previous
 - emp.var.rate
@@ -94,19 +95,23 @@ Here's the table comparing the performance of the different classifiers using th
 
 |Model|Train Accuracy|Test Accuracy|Test Precision|Fit Time (sec)|
 |--|--|--|--|--|
-|Logistic Regression|0.900359|0.896572|0.617391	|1.219468|
-|KNN|0.914020|0.887152|0.498361|1.167804|
-|Decision Tree|0.995047|0.838302|0.299444|1.534464|
-|SVM|0.906057|0.900845|**0.674185**|195.869979|
+|Baseline||0.780635|0.130617||
+|Logistic Regression|0.900813|0.901863|0.669267|0.835536|
+|KNN|0.922243|0.890186|0.592754|0.751936|
+|Decision Tree|1.0|0.872868|0.497930|0.942094|
+|SVM|0.914239|0.902125|**0.679803**|32.002124|
 
 |Model|Train Accuracy|Test Accuracy|Test Precision|
 |--|--|--|--|
-|Logistic Regression|0.899485|0.895212|0.625995|
-|KNN|0.924962|0.882490|0.464689|
-|Decision Tree|0.902593|0.900748|0.661972|
-|SVM|0.900165|0.897155|**0.675958**|
+|Logistic Regression|0.900726|0.901863|0.668217|
+|KNN|0.912271|0.893991|0.620584|
+|Decision Tree|0.913190|0.904356|0.659459|
+|SVM|0.914239|0.902125|**0.679803**|
 
 And here are the Confusion Matrix and Roc Curve for each classifier:
+
+Baseline
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/baseline-cmroc.png "Baseline - Confusion Matrix and ROC Curve")
 
 Using Default Parameters
 
