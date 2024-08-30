@@ -146,7 +146,7 @@ KNN (n_neighbors = 3, weights = uniform)
 Decision Tree (max_depth = 5, min_samples_leaf = 2, criterion = gini)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/dtree_best-cmroc.png "Decision Tree - Confusion Matrix and ROC Curve")
 
-SVM (c= 0.01)
+SVM (c= 1)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_best-cmroc.png "SVM - Confusion Matrix and ROC Curve")
 
 Just like in the previous step, we've included a table with the different metrics:
