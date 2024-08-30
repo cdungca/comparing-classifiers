@@ -62,9 +62,9 @@ Data distributions of some fields:
 
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/poutcome_distribution.png "Poutcome Distribution")
 
-Since our goal is to choose a classifier for predictive model, we will remove duration since this feature highly affects the target (e.g., if duration=0 then y='no').
+Looking at the distribution and the values for each categorical field, there are some records with "unknown" values. We will remove these records to clean the data.
 
-In pdays numeric field, client not previously contacted contains a value of 999. This will affect the scaling of data and we should just replace it to 0. 
+In pdays numeric field, client not previously contacted contains a value of 999. This will affect the scaling of data and we will just replace it with 0. 
 
 The following categorical fields will be converted to numeric using One Hot Encoding:
 
@@ -91,7 +91,33 @@ The following numeric fields will be scaled:
 - cons.conf.idx
 - euribor3m
 
-Here's the table comparing the performance of the different classifiers using the default parameters:
+Finally, we've split the data between train and test sets.
+
+## Modeling
+
+We need a baseline model to compare the performance of the different classifiers. The baseline model was created using DummyClassifier and here are the accuracy, precision, confusion matrix, and ROC curve.
+
+Test Accuracy = 0.780635
+Test Precision = 0.130617
+
+Baseline
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/baseline-cmroc.png "Baseline - Confusion Matrix and ROC Curve")
+
+Next, we've created the models and used evaluation criterias such as Train Accuracy, Test Accuracy, Test Precision, and Fit time. Here are the differenct classifiers using the defaul parametes:
+
+Logistic Regression (default parameters)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_default-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
+
+KNN (default parameters)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/knn_default-cmroc.png "KNN - Confusion Matrix and ROC Curve")
+
+Decision Tree (default parameters)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/dtree_default-cmroc.png "Decision Tree - Confusion Matrix and ROC Curve")
+
+SVM (default parameters)
+![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_default-cmroc.png "SVM - Confusion Matrix and ROC Curve")
+
+The table below shows the perfromace of the different classifiers side by side: 
 
 |Model|Train Accuracy|Test Accuracy|Test Precision|Fit Time (sec)|
 |--|--|--|--|--|
@@ -101,33 +127,15 @@ Here's the table comparing the performance of the different classifiers using th
 |Decision Tree|1.0|0.872868|0.497930|0.942094|
 |SVM|0.914239|0.902125|**0.679803**|32.002124|
 
-|Model|Train Accuracy|Test Accuracy|Test Precision|
-|--|--|--|--|
-|Logistic Regression|0.900726|0.901863|0.668217|
-|KNN|0.912271|0.893991|0.620584|
-|Decision Tree|0.913190|0.904356|0.659459|
-|SVM|0.914239|0.902125|**0.679803**|
+As we can see, all 4 classifiers performed better than the baseline model. We've also observed the following:
 
-And here are the Confusion Matrix and Roc Curve for each classifier:
+- SVM is the slowest to train and it took around 32 secs to complete.
+- Both Logistic Regression and SVM have 90% accuracy on the test set. 
+- SVM has the highest precision which is around 68% (0.6798)
 
-Baseline
-![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/baseline-cmroc.png "Baseline - Confusion Matrix and ROC Curve")
+Based on the business objective, we would like to predict clients who would say yes to a marketing compaign. We want the true positive to increase and the false negative to go down. Precision is the indicator that is important to our use case. SVM would give us the highest precision using the table above.
 
-Using Default Parameters
-
-Logistic Regression (default)
-![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_default-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
-
-KNN (default)
-![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/knn_default-cmroc.png "KNN - Confusion Matrix and ROC Curve")
-
-Decision Tree (default)
-![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/dtree_default-cmroc.png "Decision Tree - Confusion Matrix and ROC Curve")
-
-SVM (default)
-![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_default-cmroc.png "SVM - Confusion Matrix and ROC Curve")
-
-Using Best Parameters
+The next step is to tune the paramaters using GridSearchCV. After tuning, we can compare the result with those using the default parameters. Here are the result with tuning:
 
 Logistic Regression (C=0.01, Solver = liblinear)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_best-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
@@ -141,8 +149,23 @@ Decision Tree (max_depth = 5, min_samples_leaf = 2, criterion = gini)
 SVM (c= 0.01)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_best-cmroc.png "SVM - Confusion Matrix and ROC Curve")
 
+Just like in the previous step, we've included a table with the different metrics:
 
-## Recommendation
+|Model|Train Accuracy|Test Accuracy|Test Precision|
+|--|--|--|--|
+|Logistic Regression|0.900726|0.901863|0.668217|
+|KNN|0.912271|0.893991|0.620584|
+|Decision Tree|0.913190|0.904356|0.659459|
+|SVM|0.914239|0.902125|**0.679803**|
+
+SVM is still on top if we look at precision. Logistic Regression is next and it is also faster to train. 
+
+## Next Steps
+
+To further increase precision in SVM, we can try the following:
+
+- Decrease C thereby increasing the strength of the regularization.
+- In the data set, there are more records where y="no" then the positive, y="yes". Due to this imbalance, we can try changing class_weights and check precision.
 
 
 
