@@ -134,7 +134,7 @@ As we can see, all 4 classifiers performed better than the baseline model. We've
 - SVM has the highest precision which is around 68% (0.6798).
 - The training accuracy in the Decision Tree is 1 which means there is overfitting. By default, max_depth is set to none and the nodes will be expanded until all leaves are pure. Adding a limit to the max_depth can avoid overfitting.
 
-Based on the business objective, we would like to predict clients who would say yes to a marketing compaign. We want the true positive to increase and the false negative to go down. Precision is the indicator that is important to our use case. SVM would give us the highest precision using the table above.
+Based on the business objective, we would like to predict clients who would say yes to a marketing call. We want the true positive to increase and the false negative to go down. Precision is the indicator that is important to our use case. SVM would give us the highest precision using the table above.
 
 The next step is to tune the paramaters using GridSearchCV. After tuning, we can compare the result with those using the default parameters. Here are the result with tuning:
 
