@@ -10,7 +10,7 @@ You can follow the detailed analysis in the [Jupyter notebook](https://github.co
 
 ## Objective
 
-The objective of this study is to compare the performance of the different classifiers (logistic regression, k-nearest neighbors, decision trees, and support vector machines) and identify the best one suited for predicting the postive outcome a marketing call.   
+The objective of this study is to compare the performance of the different classifiers (logistic regression, k-nearest neighbors, decision trees, and support vector machines) and identify the best one suited for predicting the postive outcome of a marketing call.   
 
 ## Data Analysis
 
@@ -62,7 +62,7 @@ Data distributions of some fields:
 
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/poutcome_distribution.png "Poutcome Distribution")
 
-Looking at the distribution and the values for each categorical field, there are some records with "unknown" values. We will remove these records to clean the data.
+Looking at the distribution and the values for each categorical field, there are some records with "unknown" values in job, marital, education, default, loan. We will remove these records to clean the data.
 
 In pdays numeric field, client not previously contacted contains a value of 999. This will affect the scaling of data and we will just replace it with 0. 
 
@@ -103,7 +103,7 @@ We need a baseline model to compare the performance of the different classifiers
 Baseline
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/baseline-cmroc.png "Baseline - Confusion Matrix and ROC Curve")
 
-Next, we've created the models and used evaluation criterias such as Train Accuracy, Test Accuracy, Test Precision, and Fit time. Here are the differenct classifiers using the defaul parametes:
+Next, we've created the models and used evaluation metrics such as Train Accuracy, Test Accuracy, Test Precision, and Fit time. Here are the differenct classifiers using the defaul parameters:
 
 Logistic Regression (default parameters)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_default-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
@@ -131,13 +131,14 @@ As we can see, all 4 classifiers performed better than the baseline model. We've
 
 - SVM is the slowest to train and it took around 32 secs to complete.
 - Both Logistic Regression and SVM have 90% accuracy on the test set. 
-- SVM has the highest precision which is around 68% (0.6798)
+- SVM has the highest precision which is around 68% (0.6798).
+- The training accuracy in the Decision Tree is 1 which means there is overfitting. By default, max_depth is set to none and the nodes will be expanded until all leaves are pure. Adding a limit to the max_depth can avoid overfitting.
 
 Based on the business objective, we would like to predict clients who would say yes to a marketing compaign. We want the true positive to increase and the false negative to go down. Precision is the indicator that is important to our use case. SVM would give us the highest precision using the table above.
 
 The next step is to tune the paramaters using GridSearchCV. After tuning, we can compare the result with those using the default parameters. Here are the result with tuning:
 
-Logistic Regression (C=0.01, Solver = liblinear)
+Logistic Regression (C = 0.01, Solver = liblinear)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/lgr_best-cmroc.png "Logistic Regression - Confusion Matrix and ROC Curve")
 
 KNN (n_neighbors = 3, weights = uniform)
@@ -146,7 +147,7 @@ KNN (n_neighbors = 3, weights = uniform)
 Decision Tree (max_depth = 5, min_samples_leaf = 2, criterion = gini)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/dtree_best-cmroc.png "Decision Tree - Confusion Matrix and ROC Curve")
 
-SVM (c= 1)
+SVM (c = 10, gamma = auto)
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/svm_best-cmroc.png "SVM - Confusion Matrix and ROC Curve")
 
 Just like in the previous step, we've included a table with the different metrics:
@@ -155,8 +156,8 @@ Just like in the previous step, we've included a table with the different metric
 |--|--|--|--|
 |Logistic Regression|0.900726|0.901863|0.668217|
 |KNN|0.912271|0.893991|0.620584|
-|Decision Tree|0.913190|0.904356|0.659459|
-|SVM|0.914239|0.902125|**0.679803**|
+|Decision Tree|0.894385|0.890449|0.598187|
+|SVM|0.916601|0.903306|**0.679245**|
 
 SVM is still on top if we look at precision so we will be using it for the predictive model. 
 
