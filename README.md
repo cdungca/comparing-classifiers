@@ -97,8 +97,8 @@ Finally, we've split the data between train and test sets.
 
 We need a baseline model to compare the performance of the different classifiers. The baseline model was created using DummyClassifier and here are the accuracy, precision, confusion matrix, and ROC curve.
 
-Test Accuracy = 0.780635
-Test Precision = 0.130617
+- Test Accuracy = 0.780635
+- Test Precision = 0.130617
 
 Baseline
 ![alt text](https://github.com/cdungca/comparing-classifiers/blob/main/images/baseline-cmroc.png "Baseline - Confusion Matrix and ROC Curve")
@@ -158,7 +158,7 @@ Just like in the previous step, we've included a table with the different metric
 |Decision Tree|0.913190|0.904356|0.659459|
 |SVM|0.914239|0.902125|**0.679803**|
 
-SVM is still on top if we look at precision. Logistic Regression is next and it is also faster to train. 
+SVM is still on top if we look at precision so we will be using it for the predictive model. 
 
 ## Next Steps
 
